@@ -4,6 +4,7 @@ import requests
 import json
 import pprint
 import sys
+from prettytable import PrettyTable
 
 # Step 1: YDK Extractor
 with open(sys.argv[1]) as f:
@@ -19,6 +20,7 @@ deck = list(set(deck))
 
 deckmonsters = {}
 monsterbridges = {}
+outputtable = PrettyTable(['Banish','Reveal','Add'])
 
 # Step 2: API Calls
 for card in deck:
@@ -61,5 +63,13 @@ f.truncate(0)
 for card in monsterbridges:
     for key in monsterbridges[card]:
         for target in monsterbridges[key]:
-            print(f"Banish {card}\t--->\tReveal {key}\t--->\tAdd {target}")
-            f.write(f"Banish {card}\t--->\tReveal {key}\t--->\tAdd {target}\n" )
+            print(f"Banish {card} | Reveal {key} | Add {target}")
+            f.write(f"Banish {card} | Reveal {key} | Add {target}\n" )
+            outputtable.add_row([card,key,target])
+
+outputtablefile = open("output/" + deckname + "-small-world-analysis-clean.txt", "a") 
+outputtablefile.truncate(0)
+outputtablefile.write(outputtable.get_string())
+
+f.close()
+outputtablefile.close()
