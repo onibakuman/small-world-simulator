@@ -58,18 +58,22 @@ for card in deckmonsters:
 pprint.pprint(monsterbridges)
 # Right Now, monster-bridges is a dict with all cards that connect to each other. Now, we want to output all the cards each card can search
 
-f = open("output/" + deckname + "-small-world-analysis.txt", "a")
-f.truncate(0)
+#f = open("output/" + deckname + "-small-world-analysis.txt", "a")
+#f.truncate(0)
 for card in monsterbridges:
     for key in monsterbridges[card]:
         for target in monsterbridges[key]:
             print(f"Banish {card} | Reveal {key} | Add {target}")
-            f.write(f"Banish {card} | Reveal {key} | Add {target}\n" )
+#            f.write(f"Banish {card} | Reveal {key} | Add {target}\n" )
             outputtable.add_row([card,key,target])
 
-outputtablefile = open("output/" + deckname + "-small-world-analysis-clean.txt", "a") 
-outputtablefile.truncate(0)
-outputtablefile.write(outputtable.get_string())
+# Make a clean output file with all fields sorted
 
-f.close()
+outputtablefile = open("output/" + deckname + "-small-world-analysis.txt", "a") 
+outputtablefile.truncate(0)
+outputtablefile.write(outputtable.get_string(sortby='Banish')   + '\n')
+outputtablefile.write(outputtable.get_string(sortby='Reveal')   + '\n')
+outputtablefile.write(outputtable.get_string(sortby='Add')      + '\n')
+
+#f.close()
 outputtablefile.close()
