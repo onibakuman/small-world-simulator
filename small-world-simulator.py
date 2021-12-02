@@ -59,5 +59,5 @@ f.truncate(0)
 for card in monsterbridges:
     for key in monsterbridges[card]:
         for target in monsterbridges[key]:
-            print(f"Banish {card} ---> Reveal {key} ---> Add {target}")
-            f.write(f"Banish {card} ---> Reveal {key} ---> Add {target}\n" )
+            print(f"Banish {card}\t--->\tReveal {key}\t--->\tAdd {target}")
+            f.write(f"Banish {card}\t--->\tReveal {key}\t--->\tAdd {target}\n" )
