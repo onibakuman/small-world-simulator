@@ -9,6 +9,8 @@ import sys
 with open(sys.argv[1]) as f:
     deck = f.read().splitlines()
 
+deckname = sys.argv[1][8:-5] 
+
 deck.pop(0)
 deck.pop(0)
 decksize = deck.index("#extra")
@@ -54,7 +56,7 @@ for card in deckmonsters:
 pprint.pprint(monsterbridges)
 # Right Now, monster-bridges is a dict with all cards that connect to each other. Now, we want to output all the cards each card can search
 
-f = open("output.txt", "a")
+f = open("output/" + deckname + "-small-world-analysis.txt", "a")
 f.truncate(0)
 for card in monsterbridges:
     for key in monsterbridges[card]:
